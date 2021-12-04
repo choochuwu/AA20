@@ -1,0 +1,546 @@
+#Евгения
+
+units:
+  m: 22    #mirror
+  u: 19.05 #official cherry mx spacing
+  t: 18    #test outline
+  dx: 3     #diode x shift
+  dy: -5    #diode y shift
+points:
+  zones:
+    alpha:
+      rotate: -10 
+      columns:
+        pinky:
+          rows.bottom.bind: [5.05,u,,0]
+          rows.home.bind: [u,5.05,,0]
+          rows.number.bind: [,5.05,5.05,0]
+          key:
+            column_net: P19
+            mirror:
+              column_net: P4
+        ring:
+          stagger: u
+          rows.top.bind: [1u,3u,2u,0]
+          rows.number.bind: [,3u,5.05,0]
+          key:
+            column_net: P20
+            mirror:
+              column_net: P5
+        middle:
+          key:
+            column_net: P21
+            mirror:
+              column_net: P6
+        index:
+          rows.top.bind: [1u,2u,,.4u]
+          key:
+            column_net: P2
+            mirror:
+              column_net: P7
+        inner:
+          key:
+            column_net: P3
+            mirror:
+              column_net: P8
+      rows:
+        bottom:
+          row_net: P15
+        home:
+          row_net: P14
+        top:
+          row_net: P16
+        number:
+          row_net: P10
+          asym: left
+      key:
+        footprints:
+          mx:
+            type: mx
+            nets:
+              from: =colrow
+              to: =column_net
+          diode:
+            type: diode
+            nets:
+              from: =colrow
+              to: =row_net
+            anchor:
+              shift: [dx,dy]
+              rotate: 90
+            params:
+                through_hole: false   
+  
+      mirror:
+        ref: alpha_inner_top
+        distance: m
+    thumbs:
+      anchor.ref: alpha_middle_bottom
+      anchor.shift: [.28u,-u]
+      columns:
+        tuck:
+          key:
+            column_net: P21
+            mirror:
+              column_net: P6
+        center:
+          spread: 1.25u
+          rows.only.bind: [5.05,,,2u]
+          key:
+            column_net: P2
+            mirror:
+              column_net: P7
+      rows:
+        only:
+          row_net: P18
+      key:
+        footprints:
+          mx:
+            type: mx
+            nets:
+              from: =colrow
+              to: =column_net
+          diode:
+            type: diode
+            nets:
+              from: =colrow
+              to: =row_net
+            anchor:
+              shift: [dx,dy]
+              rotate: 90
+            params:
+                through_hole: false    
+      mirror:
+        ref: alpha_inner_top
+        distance: m
+    centerthumb:
+      anchor.ref: [alpha_inner_bottom,mirror_alpha_inner_bottom]
+      anchor.shift: [,-1.075u] 
+      columns:
+        center:
+          key.column_net: P3
+      rows: 
+        only:
+          bind: [10,.5u,,.5u]
+          asym: left
+          row_net: P18
+      key:
+        footprints:
+          mx:
+            type: mx
+            nets:
+              from: =colrow
+              to: =column_net
+          diode:
+            type: diode
+            nets:
+              from: =colrow
+              to: =row_net
+            anchor:
+              shift: [dx,dy]
+              rotate: 90
+            params:
+                through_hole: false   
+          stab:
+            type: stab
+            anchor.rotate: 180
+    garbo:
+      anchor:
+        ref: centerthumb_center_only
+        shift: [-.5u,0]
+      columns: 
+        garb1:
+        garb2:
+outlines:
+  glue:
+    glue: 
+      top.left.ref: alpha_index_top
+      top.right.ref: mirror_alpha_index_top
+      bottom.left.ref: alpha_index_bottom
+      bottom.right.ref: mirror_alpha_index_bottom
+  exports:
+    sidemountingholes:
+      - type: circle
+        anchor:
+          ref:
+            - alpha_pinky_bottom
+          shift: [-14,-14]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - mirror_alpha_pinky_bottom
+          shift: [14,-14]
+        radius: 1.15  
+      - type: circle
+        anchor:
+          ref:
+            - alpha_pinky_number
+          shift: [-14,14]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - mirror_alpha_pinky_top
+          shift: [14,14]
+        radius: 1.15   
+      - type: circle
+        anchor:
+          ref:
+            - alpha_ring_number
+          shift: [-14,14]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - mirror_alpha_ring_top
+          shift: [14,1u+14]
+        radius: 1.15 
+      - type: circle
+        anchor:
+          ref:
+            - thumbs_tuck_only
+          shift: [-14,-14]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - mirror_thumbs_tuck_only
+          shift: [14,-14]
+        radius: 1.15 
+      - type: circle
+        anchor:
+          ref:
+            - centerthumb_center_only
+          shift: [,-14]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - alpha_inner_top
+            - mirror_alpha_inner_top
+          shift: [0,1u+12.6]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - alpha_middle_number
+            - alpha_index_number
+          shift: [,14]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - mirror_alpha_middle_top
+            - mirror_alpha_index_top
+          shift: [,1u+14]
+        radius: 1.15
+      - type: circle
+        anchor:
+          ref:
+            - mirror_alpha_ring_top
+          shift: [14,6]
+        radius: 1.15    
+      - type: circle
+        anchor:
+          ref:
+            - alpha_inner_home
+            - mirror_alpha_inner_home
+          shift: [0,0]
+        radius: 1.15        
+      - type: circle
+        anchor:
+          ref:
+            - alpha_inner_bottom
+            - mirror_alpha_inner_bottom
+          shift: [0,0]
+        radius: 1.15
+    pcbadd:
+      - type: keys
+        side: both
+        size: 19
+      - type: polygon 
+        operation: add
+        points:
+          - ref: alpha_inner_bottom
+            shift: [0,0]
+          - ref: thumbs_center_only
+            shift: [9.5,-9.5]
+          - ref: centerthumb_center_only
+            shift: [-19.0250,-9.5]
+      - type: polygon 
+        operation: add
+        points:
+          - ref: mirror_alpha_inner_bottom
+            shift: [0,0]
+          - ref: mirror_thumbs_center_only
+            shift: [9.5,-9.5]
+          - ref: centerthumb_center_only
+            shift: [19.0250,-9.5]
+    pcb:
+      - type: outline
+        name: pcbadd
+        fillet: 1   
+    usbcutout:
+      - type: rectangle
+        anchor:
+          ref:
+            - mirror_alpha_pinky_top
+          shift: [-11,1.5u+4]
+        size: [10,12]
+    platecutout:
+      - type: rectangle
+        anchor:
+          ref:
+            - mirror_alpha_index_top
+            - mirror_alpha_middle_top
+          shift: [-1.5u,.55u-1]
+        size: [3.5u+1,.95u+2]
+        corner: 2
+    switchholes:
+      - type: keys
+        side: both
+        bound: false
+        size: 14
+    innerwall: #filet 2
+      - type: keys
+        side: both
+        size: 21
+        bound: true
+        operation: stack
+      - type: polygon 
+        operation: add
+        points:
+          - ref: alpha_inner_bottom
+            shift: [0,0]
+          - ref: thumbs_center_only
+            shift: [9,-10.5]
+          - ref: centerthumb_center_only
+            shift: [-20.0250,-10.5]
+      - type: polygon 
+        operation: add
+        points:
+          - ref: mirror_alpha_inner_bottom
+            shift: [0,0]
+          - ref: mirror_thumbs_center_only
+            shift: [9,-10.5]
+          - ref: centerthumb_center_only
+            shift: [20.0250,-10.5]
+    outerwall: #fillet 2.5
+      - type: keys
+        side: both
+        size: 35
+        bound: true
+        operation: stack
+      - type: polygon 
+        operation: add
+        points:
+          - ref: alpha_inner_bottom
+            shift: [0,0]
+          - ref: thumbs_center_only
+            shift: [3.5,-17.5]
+          - ref: centerthumb_center_only
+            shift: [-27.0250,-17.5]
+      - type: polygon 
+        operation: add
+        points:
+          - ref: mirror_alpha_inner_bottom
+            shift: [0,0]
+          - ref: mirror_thumbs_center_only
+            shift: [3.5,-17.5]
+          - ref: centerthumb_center_only
+            shift: [27.0250,-17.5]
+    mcuwindow:
+      - type: rectangle
+        anchor:
+          ref:
+            - mirror_alpha_index_top
+            - mirror_alpha_middle_top
+          shift: [-1.5u+1,.55u]
+        size: [3.6u,.95u+7.975]
+      - type: rectangle
+        anchor:
+          ref: alpha_inner_number
+          shift: [,0.5u+.975]
+        size: [20,7]  
+        operation: add  
+
+      - type: polygon 
+        operation: add
+        points:
+          - ref: alpha_inner_number
+            shift: [.5u+1,.7u]
+          - ref: alpha_inner_top
+            shift: [.5u+1,.5u+1.36]
+          - ref: mirror_alpha_inner_top
+            shift: [-10,.5u+1]                  
+    casesidewithoutcutout:
+      - type: outline
+        name: outerwall
+        fillet: 2.5
+      - type: outline
+        name: innerwall
+        fillet: 2
+        operation: subtract
+      - -sidemountingholes
+    casesidewithcutout:
+      - +casesidewithoutcutout
+      - -usbcutout
+      - -sidemountingholes      
+    plate:
+      - type: outline
+        name: outerwall
+        operation: stack
+        fillet: 2.5 
+      - -usbcutout
+      - -platecutout 
+      - -switchholes
+      - -sidemountingholes
+    bottomplate:
+      - type: outline
+        name: outerwall
+        operation: stack
+        fillet: 2.5 
+      - type: circle
+        anchor:
+          ref:
+            - mirror_alpha_ring_top
+          shift: [0,1u]
+        radius: 1
+        operation: subtract
+      - -sidemountingholes        
+    smallerthumb:
+      - type: rectangle
+        anchor:
+          ref:
+            - alpha_pinky_bottom
+          shift: [.55u+.1,-.5u-5]
+        size: [t-.4,t+5]
+      - type: rectangle
+        anchor:
+          ref:
+            - mirror_alpha_pinky_bottom
+          shift: [-1.475u,-.5u-5]
+        size: [t-.4,t+5]
+
+    lesssmallerthumb:
+      - type: rectangle
+        anchor:
+          ref:
+            - alpha_pinky_bottom
+            - thumbs_tuck_only
+          shift: [-.6u+.18,-.5u-5]
+        size: [1.5t+.2625,t+5]
+      - type: rectangle
+        anchor:
+          ref:
+            - mirror_alpha_pinky_bottom
+            - mirror_thumbs_tuck_only
+          shift: [-.8u-.7750,-.5u-5]
+        size: [1.5t+.2625,t+5]
+    topplateint:
+      - type: outline
+        name: innerwall
+      - -mcuwindow
+      - type: rectangle
+        anchor:
+          ref:
+            - alpha_pinky_bottom
+          shift: [.55u+.1,-.5u-5]
+        size: [t-.4,t+5]
+        operation: subtract
+      - type: rectangle
+        anchor:
+          ref:
+            - mirror_alpha_pinky_bottom
+          shift: [-1.475u,-.5u-5]
+        size: [t-.4,t+5]
+        operation: subtract
+    topplateintint:
+      - type: outline
+        name: outerwall
+        fillet: 2.5
+      - type: outline
+        name: topplateint
+        fillet: 2       
+        operation: subtract
+    topplatewithsmallthumb:
+      - +topplateintint
+      - type: outline
+        name: smallerthumb
+        fillet: 2
+        operation: add
+      - -sidemountingholes      
+    lesssmallint:
+      - type: outline
+        name: innerwall
+      - -mcuwindow
+      - type: rectangle
+        anchor:
+          ref:
+            - alpha_pinky_bottom
+            - thumbs_tuck_only
+          shift: [-.6u+.18,-.5u-5]
+        size: [1.5t+.2625,t+5]
+        operation: subtract
+      - type: rectangle
+        anchor:
+          ref:
+            - mirror_alpha_pinky_bottom
+            - mirror_thumbs_tuck_only
+          shift: [-.8u-.7750,-.5u-5]
+        size: [1.5t+.2625,t+5]
+        operation: subtract
+        
+    topplatewithlesssmallthumb:
+      - +topplateintint
+      - type: outline
+        name: lesssmallerthumb
+        fillet: 2
+        operation: add
+      - -sidemountingholes  
+    centertriangle:
+      - type: polygon
+        points:
+          - ref: alpha_inner_bottom
+            shift: [.55u,-.43u]
+          - ref: mirror_alpha_inner_bottom
+            shift: [.55u,-.43u]
+          - ref: [mirror_alpha_inner_top, alpha_inner_top]
+            shift: [0,.1u] 
+    centertriangleround:
+      - type: outline
+        name: centertriangle    
+        fillet: 2
+      - -sidemountingholes        
+    demo:
+      - +topplatewithsmallthumb
+      - ^centertriangleround
+      - -sidemountingholes
+      - type: keys
+        size: 18
+        bound: false
+        operation: stack
+        side: both
+pcbs:
+  AA20shield:
+    outlines.main.outline: pcb
+    footprints:
+      mcu:
+        type: promicro
+        anchor:
+          ref: mirror_alpha_ring_top
+          shift: [8.6,1u+.5]
+          rotate: 180
+      reset:
+        type: button
+        anchor:
+          ref:
+            - mirror_alpha_ring_top
+          shift: [0,1u]
+          
+        nets:
+          from: RST
+          to: GND
+        params:
+          side: B
